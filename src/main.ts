@@ -7,6 +7,9 @@ import { env } from "process";
 async function run() {
   try {
     const config = parseConfig(env);
+    if (process.env.RELEASE_TAG_NAME === 'string' && process.env.RELEASE_TAG_NAME !== '') {
+      config.input_tag_name = process.env.RELEASE_TAG_NAME;
+    }
     if (
       !config.input_tag_name &&
       !isTag(config.github_ref) &&
